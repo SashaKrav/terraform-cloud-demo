@@ -17,3 +17,4 @@ resource "aws_db_instance" "default" {
 	db_subnet_group_name = aws_db_subnet_group.default.name
 	skip_final_snapshot = true #used to delete the repo in the future without this you cant delete. There are bugs reported 
 }
+
