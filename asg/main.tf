@@ -13,10 +13,7 @@ module "asg" {
   launch_template_name        = "example-asg"
   launch_template_description = "Launch template example"
   update_default_version      = true
-  user_data                   = base64encode(
-    #!/bin/bash,
-    sudo yum install httpd -y
-  )
+  user_data                   = base64encode("sudo yum install httpd -y")
   image_id        = data.aws_ami.amazon.id
   instance_type     = "t3.micro"
   ebs_optimized     = false
