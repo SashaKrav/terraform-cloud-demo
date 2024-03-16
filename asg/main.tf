@@ -8,11 +8,16 @@ module "asg" {
   wait_for_capacity_timeout = 0
   health_check_type         = "EC2"
   vpc_zone_identifier       = data.terraform_remote_state.vpc.outputs.private_subnets
+  
   # Launch template
   launch_template_name        = "example-asg"
   launch_template_description = "Launch template example"
   update_default_version      = true
-  image_id        = data.aws_ami.ubuntu.id
+  user_data                   = base64encode(
+    #!/bin/bash,
+    sudo yum install httpd -y
+  )
+  image_id        = data.aws_ami.amazon.id
   instance_type     = "t3.micro"
   ebs_optimized     = false
   enable_monitoring = false
